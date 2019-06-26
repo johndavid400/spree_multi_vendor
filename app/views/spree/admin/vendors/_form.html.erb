@@ -1,5 +1,5 @@
 <%= render partial: 'spree/shared/error_messages', locals: { target: @vendor } %>
-<div class="form-group">
+<div class="form-group" data-hook="admin_vendor_form">
   <%= f.field_container :name do %>
     <%= f.label :name %>
     <%= f.text_field :name, class: 'form-control' %>
