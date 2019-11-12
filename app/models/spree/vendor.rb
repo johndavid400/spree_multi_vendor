@@ -55,6 +55,13 @@ module Spree
       update(notification_email: email)
     end
 
+    def available_shipping_methods
+      # fetch all shipping methods that either have the vendor's id or nil
+      # this allows us to set a default shipping method that all vendors can use,
+      # without explicitly defining a new one for each vendor
+      Spree::ShippingMethod.where(vendor_id: [id, nil])
+    end
+
     private
 
     def create_stock_location
