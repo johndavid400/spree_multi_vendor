@@ -1,10 +1,15 @@
 Spree::Stock::Package.class_eval do
   def shipping_methods
+    all_shipping_methods = shipping_categories.map(&:shipping_methods).reduce(:&).to_a
     if (vendor = stock_location.vendor)
-      #vendor.available_shipping_methods.to_a
-      shipping_categories.map(&:shipping_methods).reduce(:&).to_a & vendor.shipping_methods.to_a
+      available_vendor_shipping_methods = all_shipping_methods & vendor.shipping_methods.to_a
+      if available_vendor_shipping_methods.any?
+        available_vendor_shipping_methods
+      else
+        all_shipping_methods & vendor.available_shipping_methods.to_a
+      end
     else
-      shipping_categories.map(&:shipping_methods).reduce(:&).to_a
+      all_shipping_methods
     end
   end
 end
