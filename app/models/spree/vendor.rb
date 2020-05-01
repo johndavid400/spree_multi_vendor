@@ -34,6 +34,8 @@ module Spree
 
     has_many :users, through: :vendor_users
 
+    has_and_belongs_to_many :stores, join_table: 'spree_stores_vendors'
+
     after_create :create_stock_location
     after_update :update_stock_location_names
 

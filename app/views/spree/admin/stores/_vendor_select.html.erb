@@ -1,0 +1,5 @@
+<%= f.field_container :vendors, class: ['form-group'] do %>
+  <%= f.label :vendors, Spree.t(:vendors)  %>
+  <%= f.collection_select(:vendor_ids, Spree::Vendor.all, :id, :name, { }, { class: 'select2', multiple: true }) %>
+  <%= f.error_message_on :vendors %>
+<% end %>
