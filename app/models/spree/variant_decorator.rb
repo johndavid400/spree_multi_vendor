@@ -5,6 +5,7 @@ Spree::Variant.class_eval do
   private
 
   def assign_vendor_id
+    return if self.vendor.present?
     self.vendor_id = product.vendor_id
   end
 
